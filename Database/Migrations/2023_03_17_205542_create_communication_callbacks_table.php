@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('communication_callbacks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('communication_id');
+            $table->string('callback');
+            $table->json('callback_data');
             $table->timestamps();
         });
     }
