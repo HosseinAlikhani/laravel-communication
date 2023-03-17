@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('communication_logs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('communication_id');
+            $table->string('status');
+            $table->text('message');
+            $table->timestamp('created_at');
         });
     }
 
