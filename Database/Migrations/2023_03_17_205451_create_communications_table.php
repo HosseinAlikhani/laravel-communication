@@ -16,12 +16,14 @@ return new class extends Migration
             $table->integer('service_type');
             $table->integer('port_type');
             $table->morphs('model');
-            $table->json('template')->nullable();
+            $table->text('template')->nullable();
             $table->integer('template_id')->nullable();
-            $table->integer('template_data');
+            $table->json('template_data');
+            $table->json('receiver_data');
             $table->timestamp('send_at')->nullable();
             $table->timestamp('delivery_at')->nullable();
             $table->integer('try')->default(0);
+            $table->enum('thread', ['sync', 'async']);
             $table->timestamps();
         });
     }
