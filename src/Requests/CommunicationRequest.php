@@ -27,6 +27,7 @@ final class CommunicationRequest
     private function initialize(array $request)
     {
         $this->serviceType = $this->setServiceType($request['service_type']);
+        $this->portType = $this->setPortType($request['port_type'] ?? null);
     }
 
     /**
@@ -41,5 +42,15 @@ final class CommunicationRequest
             throw new CommunicationRequest(trans('communication::messages.service_type_not_found'));
         }
         return $serviceType;
+    }
+
+    /**
+     * set & check port type
+     * @param int|null $portType
+     * @return int
+     */
+    private function setPortType(int|null $portType): int
+    {
+        
     }
 }
