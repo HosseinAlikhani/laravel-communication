@@ -4,7 +4,9 @@
     "keywords": [
         "d3cr33",
         "laravel",
-        "communication"
+        "communication",
+        "sms",
+        "push-notification"
     ],
     "homepage": "https://github.com/HosseinAlikhani/laravel-communication",
     "license": "MIT",
