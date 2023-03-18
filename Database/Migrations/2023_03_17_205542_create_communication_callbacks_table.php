@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('communication_id');
             $table->string('callback');
             $table->json('callback_data');
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 
