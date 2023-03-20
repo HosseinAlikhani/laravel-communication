@@ -4,9 +4,17 @@ namespace D3cr33\Communication\Services;
 use D3cr33\Communication\Config\Config;
 use D3cr33\Communication\Exceptions\ServiceException;
 use D3cr33\Communication\Models\Communication;
+use D3cr33\Communication\Responses\CommunicationResponse;
 
-class Service
+abstract class Service
 {
+    /**
+     * translate response
+     * @var array $response
+     * @return
+     */
+    abstract protected function responseTranslate(array $response);
+
     /**
      * service type
      * @var array
@@ -39,10 +47,30 @@ class Service
      */
     protected Communication $communication;
 
+    /**
+     * store communication response
+     * @var CommunicationResponse
+     */
+    protected CommunicationResponse $response;
+
     public function __construct(Communication $communication)
     {
         $this->communication = $communication;
         $this->initialize();
+    }
+
+    /**
+     * create new communication response instance
+     * @param array $response
+     * @return void
+     */
+    protected function setResponse(array $response): void
+    {
+        $this->response = new CommunicationResponse(
+            $response['status'] ?? true,
+            $response['statusCode'],
+            $response['message']
+        );
     }
 
     /**
@@ -73,11 +101,13 @@ class Service
 
     /**
      * create communication log
-     * @param array $logData
      */
-    public function log($logData)
+    public function log()
     {
-        $this->communication->logs()->create($logData);
+        $this->communication->logs()->create([
+            'status'    =>  $this->response->statusCode,
+            'message'   =>  $this->response->message
+        ]);
     }
 
     /**
