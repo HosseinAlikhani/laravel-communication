@@ -69,8 +69,9 @@ class Communication extends Model
      */
     public function makePort(): object
     {
-        $service = Service::makeService($this->service_type);
-        return new $service($this);
+        $service = Service::makeService($this->service);
+        $l = new $service($this);
+        dd( $l );
     }
 
     /**
@@ -87,5 +88,13 @@ class Communication extends Model
     public function callback()
     {
         return $this->hasOne(CommunicationCallback::class);
+    }
+
+    /**
+     * communication logs relation
+     */
+    public function logs()
+    {
+        return $this->hasOne(CommunicationLog::class);
     }
 }
