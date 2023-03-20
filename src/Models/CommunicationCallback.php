@@ -9,4 +9,10 @@ class CommunicationCallback extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'callback_data' =>  'array',
+    ];
+
+    const UPDATED_AT = null;
 }
