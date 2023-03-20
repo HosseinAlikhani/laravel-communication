@@ -4,5 +4,6 @@ return [
     'config_not_found'  =>  'تنظیمات برای :port یافت نشد.',
     'service_type_not_found'    =>  'شناسه سرویس :serviceType معتبر نمی باشد.',
     'port_type_not_found'   =>  'شناسه پورت :portType معتبر نمی باشد.',
-    'template_not_found'    =>  'شما باید یکی از مقادیر template یا templateId را مقداردهی نمایید.'
+    'template_not_found'    =>  'شما باید یکی از مقادیر template یا templateId را مقداردهی نمایید.',
+    'thread_not_found'  =>  'شناسه نحوه پاسخ :thread معتبر نمی باشد.',
 ];
