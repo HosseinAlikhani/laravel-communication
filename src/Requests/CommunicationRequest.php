@@ -123,6 +123,9 @@ final class CommunicationRequest
                 ]));
             }
             $this->callbackData = $request['callback_data'];
+        } else {
+            $this->callback = null;
+            $this->callbackData = null;
         }
     }
 
