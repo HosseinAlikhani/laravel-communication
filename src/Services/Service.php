@@ -2,6 +2,7 @@
 namespace D3cr33\Communication\Services;
 
 use D3cr33\Communication\Config\Config;
+use D3cr33\Communication\Exceptions\ServiceException;
 use D3cr33\Communication\Models\Communication;
 
 class Service
@@ -50,18 +51,35 @@ class Service
      */
     private function initialize(): void
     {
-        $this->config = new Config($this->communication->service_type);
+        $this->config = new Config($this->communication->service);
+        $this->executePort();
     }
 
     /**
-     * make service from serviceType
-     * @param int $serviceType
+     * execute communication service port
+     */
+    private function executePort()
+    {
+        $service = self::makeService($this->communication->service);
+        $port = $service::PORT[$this->communication->port];
+        if(! method_exists($this, $port) ){
+            throw new ServiceException(trans('communication::messages.port_not_support',[
+                'port'  =>  $port,
+                'service'   =>  $service
+            ]));
+        }
+        $this->{$port}();
+    }
+
+    /**
+     * make service from service
+     * @param int $service
      * @return string
      */
-    public static function makeService(int $serviceType): string
+    public static function makeService(int $service): string
     {
-        $serviceType = Service::SERVICE_TYPE[$serviceType];
-        return 'D3cr33\Communication\Services\\'.ucfirst($serviceType).'Service';
+        $service = Service::SERVICE_TYPE[$service];
+        return 'D3cr33\Communication\Services\\'.ucfirst($service).'Service';
     }
 
     /**
