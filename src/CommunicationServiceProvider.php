@@ -44,7 +44,7 @@ class CommunicationServiceProvider extends ServiceProvider
     private function registerPublishing()
     {
         $this->publishes([
-            __DIR__.'/Config/communication.php' => config_path('communication.php'),
+            __DIR__.'/../Config/communication.php' => config_path('communication.php'),
         ], 'communication-config');
     }
 }
