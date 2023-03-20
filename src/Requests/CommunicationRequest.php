@@ -33,7 +33,7 @@ final class CommunicationRequest
         $this->setPortType($request['port_type'] ?? null);
         $this->modelType = $request['model_type'];
         $this->modelId = $request['model_id'];
-
+        $this->setTemplate($request);
     }
 
     /**
@@ -66,5 +66,21 @@ final class CommunicationRequest
             ]));
         }
         $this->portType = $portType;
+    }
+
+    /**
+     * set template & templateId
+     * @param array $request
+     * @return void
+     */
+    private function setTemplate(array $request): void
+    {
+        if( isset($request['template']) ){
+            $this->template = $request['template'];
+        }elseif( isset($request['template_id']) ){
+            $this->templateId = $request['template_id'];
+        }else{
+            throw new CommunicationRequestException(trans('communication::messages.template_not_found'));
+        }
     }
 }
