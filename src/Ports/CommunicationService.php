@@ -16,6 +16,6 @@ final class CommunicationService
 
         $communication = Communication::createCommunication($request);
 
-        $communication->makePort();
+        return $communication->makePort();
     }
 }
