@@ -16,6 +16,9 @@ final class CommunicationRequest
     public array $receiverData;
     public string|null $sendAt;
     public string $thread;
+    public string|null $callback;
+    public array|null $callbackData;
+
     /**
      * constructor of communication request
      * @param array $request
@@ -38,6 +41,7 @@ final class CommunicationRequest
         $this->receiverData = $request['receiver_data'];
         $this->sendAt = $request['send_at'] ?? null;
         $this->setThread($request['thread'] ?? null);
+        $this->setCallback($request);
     }
 
     /**
@@ -102,6 +106,24 @@ final class CommunicationRequest
             $thread = Service::THREAD_ASYNC; // set default thread
         }
         $this->thread = $thread;
+    }
+
+    /**
+     * set callback & callback data
+     * @param array $request
+     * @return void
+     */
+    private function setCallback(array $request)
+    {
+        if ( isset($request['callback']) ){
+            $this->callback = $request['callback'];
+            if(! isset($request['callback_data'])){
+                throw new CommunicationRequestException(trans('communication::messages.callback_data_not_found',[
+                    'callback'  =>  $this->callback
+                ]));
+            }
+            $this->callbackData = $request['callback_data'];
+        }
     }
 
     /**
