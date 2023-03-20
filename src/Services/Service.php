@@ -17,6 +17,14 @@ class Service
         1   =>  'kavehnegar'
     ];
 
+    public const THREAD = [
+        self::THREAD_SYNC   =>  'sync',
+        self::THREAD_ASYNC   =>  'async'
+    ];
+
+    public const THREAD_SYNC = 1;
+    public const THREAD_ASYNC = 2;
+
     /**
      * store config
      * @var Config
