@@ -14,7 +14,7 @@ final class CommunicationRequest
     public int $templateId;
     public array $templateData;
     public array $receiverData;
-    public string $sendAt;
+    public string|null $sendAt;
     public string $thread;
     /**
      * constructor of communication request
@@ -34,6 +34,10 @@ final class CommunicationRequest
         $this->modelType = $request['model_type'];
         $this->modelId = $request['model_id'];
         $this->setTemplate($request);
+        $this->templateData = $request['template_data'];
+        $this->receiverData = $request['receiver_data'];
+        $this->sendAt = $request['send_at'] ?? null;
+        $this->setThread($request['thread'] ?? null);
     }
 
     /**
@@ -82,5 +86,21 @@ final class CommunicationRequest
         }else{
             throw new CommunicationRequestException(trans('communication::messages.template_not_found'));
         }
+    }
+
+    /**
+     * set thread
+     * @param int|null $thread
+     * @return void
+     */
+    private function setThread(int|null $thread): void
+    {
+        if(! key_exists($thread, Service::THREAD) )
+        {
+            throw new CommunicationRequestException(trans('communication::messages.thread_not_found',[
+                'thread'  =>  $thread
+            ]));
+        }
+        $this->thread = $thread;
     }
 }
