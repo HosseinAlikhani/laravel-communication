@@ -6,16 +6,23 @@ use D3cr33\Communication\Models\Communication;
 
 class Service
 {
+    /**
+     * service type
+     * @var array
+     */
     public const SERVICE_TYPE = [
         1   =>  'smsir',
         2   =>  'kavehnegar'
     ];
 
+    /**
+     * thread
+     * @var array
+     */
     public const THREAD = [
         self::THREAD_SYNC   =>  'sync',
         self::THREAD_ASYNC   =>  'async'
     ];
-
     public const THREAD_SYNC = 1;
     public const THREAD_ASYNC = 2;
 
@@ -25,18 +32,25 @@ class Service
      */
     protected Config $config;
 
+    /**
+     * store communication
+     * @var Communication
+     */
+    protected Communication $communication;
+
     public function __construct(Communication $communication)
     {
-        $this->initialize($communication);
+        $this->communication = $communication;
+        $this->initialize();
     }
 
     /**
      * initialize port service
-     * @param Communication $communication
+     * @return void
      */
-    private function initialize(Communication $communication)
+    private function initialize(): void
     {
-        $this->config = new Config($communication->service_type);
+        $this->config = new Config($this->communication->service_type);
     }
 
     /**
