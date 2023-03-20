@@ -17,7 +17,7 @@ class SmsirService extends Service
      */
     private string $token;
 
-    public function generateToken()
+    private function generateToken()
     {
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
