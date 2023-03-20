@@ -49,4 +49,21 @@ class Service
         $serviceType = Service::SERVICE_TYPE[$serviceType];
         return 'D3cr33\Communication\Services\\'.ucfirst($serviceType).'Service';
     }
+
+    /**
+     * check is service port valid
+     * @param int $service
+     * @param int|null $port
+     * @return bool|string
+     */
+    public static function isServicePortValid(int $service, int|null $port): string|bool
+    {
+        $service = self::makeService($service);
+
+        if(! $port || ! key_exists($port, $service::PORT) ) {
+            return false;
+        }
+
+        return $service::PORT[$port];
+    }
 }
