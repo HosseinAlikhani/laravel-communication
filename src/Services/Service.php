@@ -21,7 +21,7 @@ abstract class Service
      */
     public const SERVICE_TYPE = [
         1   =>  'smsir',
-        2   =>  'kavehnegar'
+        2   =>  'slack'
     ];
 
     /**
