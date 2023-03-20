@@ -5,6 +5,12 @@ use Illuminate\Support\Facades\Http;
 
 class SmsirService extends Service
 {
+    public const PORT = [
+        1   =>  'send',
+        2   =>  'array',
+        3   =>  'verification',
+    ];
+
     /**
      * store api token
      * @var string
@@ -27,6 +33,4 @@ class SmsirService extends Service
 
         $this->token = $response->json('TokenKey');
     }
-
-    
 }
