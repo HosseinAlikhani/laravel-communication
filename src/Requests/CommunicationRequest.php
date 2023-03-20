@@ -127,6 +127,15 @@ final class CommunicationRequest
     }
 
     /**
+     * check request has callback or not
+     * @return bool
+     */
+    public function hasCallback(): bool
+    {
+        return $this->callback ? true : false;
+    }
+
+    /**
      * to array communication request
      * @return array
      */
