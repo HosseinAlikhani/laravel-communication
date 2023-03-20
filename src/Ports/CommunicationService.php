@@ -1,5 +1,5 @@
 <?php
-namespace D3cr33\Communication;
+namespace D3cr33\Communication\Ports;
 
 use D3cr33\Communication\Models\Communication;
 use D3cr33\Communication\Requests\CommunicationRequest;
