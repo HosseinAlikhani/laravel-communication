@@ -50,6 +50,7 @@ class Communication extends Model
             return null;
         }
 
+        $shouldReplace = [];
         foreach ($communication->template_data as $key => $value) {
             $shouldReplace[':'.Str::ucfirst($key ?? '')] = Str::ucfirst($value ?? '');
             $shouldReplace[':'.Str::upper($key ?? '')] = Str::upper($value ?? '');
