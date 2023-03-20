@@ -66,4 +66,12 @@ class Communication extends Model
     {
         return $this->hasOne(CommunicationMessageLog::class);
     }
+
+    /**
+     * communication callback relation
+     */
+    public function callback()
+    {
+        return $this->hasOne(CommunicationCallback::class);
+    }
 }
