@@ -72,6 +72,16 @@ class Service
     }
 
     /**
+     * store communication log
+     * @param array $logData
+     * @return void
+     */
+    public function log(array $logData): void
+    {
+        $this->communication->logs()->create($logData);
+    }
+
+    /**
      * make service from service
      * @param int $service
      * @return string
