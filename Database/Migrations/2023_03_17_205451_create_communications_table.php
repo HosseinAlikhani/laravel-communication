@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('communications', function (Blueprint $table) {
             $table->id();
-            $table->integer('service_type');
-            $table->integer('port_type');
+            $table->integer('service');
+            $table->integer('port');
             $table->morphs('model');
             $table->text('template')->nullable();
             $table->integer('template_id')->nullable();
