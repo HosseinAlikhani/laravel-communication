@@ -7,14 +7,8 @@ use D3cr33\Communication\Models\Communication;
 class Service
 {
     public const SERVICE_TYPE = [
-        0   =>  'sms',
-        1   =>  'push-notification',
-        2   =>  'email'
-    ];
-
-    public const PORT_TYPE = [
-        0   =>  'smsir',
-        1   =>  'kavehnegar'
+        1   =>  'smsir',
+        2   =>  'kavehnegar'
     ];
 
     public const THREAD = [
@@ -43,5 +37,16 @@ class Service
     private function initialize(Communication $communication)
     {
         $this->config = new Config($communication->port_type);
+    }
+
+    /**
+     * make service from serviceType
+     * @param int $serviceType
+     * @return string
+     */
+    public static function makeService(int $serviceType): string
+    {
+        $serviceType = Service::SERVICE_TYPE[$serviceType];
+        return 'D3cr33\Communication\Services\\'.ucfirst($serviceType).'Service';
     }
 }
