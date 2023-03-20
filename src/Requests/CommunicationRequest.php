@@ -97,9 +97,7 @@ final class CommunicationRequest
     {
         if(! key_exists($thread, Service::THREAD) )
         {
-            throw new CommunicationRequestException(trans('communication::messages.thread_not_found',[
-                'thread'  =>  $thread
-            ]));
+            $thread = Service::THREAD_ASYNC; // set default thread
         }
         $this->thread = $thread;
     }
