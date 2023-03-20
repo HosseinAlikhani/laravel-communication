@@ -10,8 +10,8 @@ final class CommunicationRequest
     public int $portType;
     public string $modelType;
     public int $modelId;
-    public string $template;
-    public int $templateId;
+    public string|null $template;
+    public int|null $templateId;
     public array $templateData;
     public array $receiverData;
     public string|null $sendAt;
@@ -81,8 +81,10 @@ final class CommunicationRequest
     {
         if( isset($request['template']) ){
             $this->template = $request['template'];
+            $this->templateId = null;
         }elseif( isset($request['template_id']) ){
             $this->templateId = $request['template_id'];
+            $this->template = null;
         }else{
             throw new CommunicationRequestException(trans('communication::messages.template_not_found'));
         }
@@ -100,5 +102,25 @@ final class CommunicationRequest
             $thread = Service::THREAD_ASYNC; // set default thread
         }
         $this->thread = $thread;
+    }
+
+    /**
+     * to array communication request
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'service_type'  =>  $this->serviceType,
+            'port_type' =>  $this->portType,
+            'model_type'    =>  $this->modelType,
+            'model_id'  =>  $this->modelId,
+            'template'  =>  $this->template,
+            'template_id'   =>  $this->templateId,
+            'template_data' =>  $this->templateData,
+            'receiver_data' =>  $this->receiverData,
+            'send_at'   =>  $this->sendAt,
+            'thread'    =>  $this->thread
+        ];
     }
 }
