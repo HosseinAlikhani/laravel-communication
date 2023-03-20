@@ -32,7 +32,10 @@ class Communication extends Model
                 'callback_data' =>  $request->callbackData,
             ]);
         }
-        return $communication->load(['callback']);
+
+        // make template
+        self::makeTemplateReplacement($communication);
+        return $communication->load(['callback', 'message']);
     }
 
     /**
