@@ -29,16 +29,19 @@ final class CommunicationRequest
 
     private function initialize(array $request)
     {
-        $this->serviceType = $this->setServiceType($request['service_type']);
-        $this->portType = $this->setPortType($request['port_type'] ?? null);
+        $this->setServiceType($request['service_type']);
+        $this->setPortType($request['port_type'] ?? null);
+        $this->modelType = $request['model_type'];
+        $this->modelId = $request['model_id'];
+
     }
 
     /**
      * set service type on serviceType property
      * @param int $serviceType
-     * @return int
+     * @return void
      */
-    private function setServiceType(int $serviceType): int
+    private function setServiceType(int $serviceType): void
     {
         if(! key_exists($serviceType, Service::SERVICE_TYPE) )
         {
@@ -46,16 +49,22 @@ final class CommunicationRequest
                 'serviceType'  =>  $serviceType
             ]));
         }
-        return $serviceType;
+        $this->serviceType = $serviceType;
     }
 
     /**
      * set & check port type
      * @param int|null $portType
-     * @return int
+     * @return void
      */
-    private function setPortType(int|null $portType): int
+    private function setPortType(int|null $portType)
     {
-
+        if(! key_exists($portType, Service::PORT_TYPE) )
+        {
+            throw new CommunicationRequestException(trans('communication::messages.port_type_not_found',[
+                'portType'  =>  $portType
+            ]));
+        }
+        $this->portType = $portType;
     }
 }
