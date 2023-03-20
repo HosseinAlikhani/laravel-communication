@@ -2,6 +2,7 @@
 namespace D3cr33\Communication\Models;
 
 use D3cr33\Communication\Requests\CommunicationRequest;
+use D3cr33\Communication\Services\Service;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -60,6 +61,17 @@ class Communication extends Model
             'message'   =>  $line
         ]);
         return $line;
+    }
+
+    /**
+     * make communication port
+     * @return object
+     */
+    public function makePort(): object
+    {
+        $port = Service::PORT_TYPE[$this->port_type];
+        $port = 'D3cr33\Communication\Services\\'.ucfirst($port).'Service';
+        return new $port($this);
     }
 
     /**
