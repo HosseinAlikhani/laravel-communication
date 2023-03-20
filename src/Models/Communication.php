@@ -69,9 +69,8 @@ class Communication extends Model
      */
     public function makePort(): object
     {
-        $port = Service::PORT_TYPE[$this->port_type];
-        $port = 'D3cr33\Communication\Services\\'.ucfirst($port).'Service';
-        return new $port($this);
+        $service = Service::makeService($this->service_type);
+        return new $service($this);
     }
 
     /**
