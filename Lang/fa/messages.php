@@ -6,4 +6,5 @@ return [
     'port_type_not_found'   =>  'شناسه پورت :portType معتبر نمی باشد.',
     'template_not_found'    =>  'شما باید یکی از مقادیر template یا templateId را مقداردهی نمایید.',
     'thread_not_found'  =>  'شناسه نحوه پاسخ :thread معتبر نمی باشد.',
+    'callback_data_not_found'   =>  'مقدار بازگشتی برای :callback وارد نشده است.',
 ];
