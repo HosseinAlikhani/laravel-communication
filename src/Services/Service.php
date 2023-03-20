@@ -36,7 +36,7 @@ class Service
      */
     private function initialize(Communication $communication)
     {
-        $this->config = new Config($communication->port_type);
+        $this->config = new Config($communication->service_type);
     }
 
     /**
