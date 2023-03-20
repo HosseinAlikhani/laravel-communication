@@ -3,53 +3,44 @@ namespace D3cr33\Communication\Config;
 
 use D3cr33\Communication\Exceptions\ConfigException;
 use D3cr33\Communication\Exceptions\PortException;
+use D3cr33\Communication\Services\Service;
 
 final class Config
 {
     /**
-     * store ports
+     * constructor of service config
+     * @param int $service
      */
-    public const PORTS = [
-        1   =>  'SMSIR',
-    ];
-
-    /**
-     * constructor of port class
-     * @param int $port
-     */
-    public function __construct(int $port)
+    public function __construct(int $service)
     {
         $this->initialize(
-            $this->getPort($port)
+            $this->getService($service)
         );
     }
 
     /**
-     * get port
-     * @param int $port
+     * get service
+     * @param int $service
      */
-    private function getPort(int $port)
+    private function getService(int $service)
     {
-        if(key_exists($port, self::PORTS)){
-            return self::PORTS[$port];
-        }
-        throw new PortException(trans('communication::messages.port_not_found'));
+        return Service::SERVICE_TYPE[$service];
     }
 
     /**
-     * initialize and get port config
-     * @param string $port
+     * initialize and get service config
+     * @param string $service
      * @return void
      */
-    public function initialize(string $port):void 
+    public function initialize(string $service):void
     {
         // get config
-        $config = config('communication.'.$port);
+        $config = config('communication.'.strtoupper($service));
 
         if(! $config || ! count($config) ){
             throw new ConfigException(
                 trans('communication::messages.config_not_found',[
-                    'port'  =>  $port
+                    'service'  =>  $service
                 ])
             );
         }
