@@ -6,8 +6,8 @@ use D3cr33\Communication\Services\Service;
 
 final class CommunicationRequest
 {
-    public int $serviceType;
-    public int $portType;
+    public int $service;
+    public int $port;
     public string $modelType;
     public int $modelId;
     public string|null $template;
@@ -22,8 +22,8 @@ final class CommunicationRequest
     /**
      * constructor of communication request
      * @param array $request
-     * @param int $request[service_type]
-     * @param int|null $request[port_type]
+     * @param int $request[service]
+     * @param int|null $request[port]
      */
     public function __construct(array $request)
     {
@@ -32,8 +32,8 @@ final class CommunicationRequest
 
     private function initialize(array $request)
     {
-        $this->setServiceType($request['service_type']);
-        $this->setPortType($request['port_type'] ?? null);
+        $this->setServiceType($request['service']);
+        $this->setPortType($request['port'] ?? null);
         $this->modelType = $request['model_type'];
         $this->modelId = $request['model_id'];
         $this->setTemplate($request);
@@ -45,35 +45,35 @@ final class CommunicationRequest
     }
 
     /**
-     * set service type on serviceType property
-     * @param int $serviceType
+     * set service type on service property
+     * @param int $service
      * @return void
      */
-    private function setServiceType(int $serviceType): void
+    private function setServiceType(int $service): void
     {
-        if(! key_exists($serviceType, Service::SERVICE_TYPE) )
+        if(! key_exists($service, Service::SERVICE_TYPE) )
         {
             throw new CommunicationRequestException(trans('communication::messages.service_type_not_found',[
-                'serviceType'  =>  $serviceType
+                'service'  =>  $service
             ]));
         }
-        $this->serviceType = $serviceType;
+        $this->service = $service;
     }
 
     /**
      * set & check port type
-     * @param int|null $portType
+     * @param int|null $port
      * @return void
      */
-    private function setPortType(int|null $portType)
+    private function setPortType(int|null $port)
     {
-        if(! Service::isServicePortValid($this->serviceType, $portType) )
+        if(! Service::isServicePortValid($this->service, $port) )
         {
             throw new CommunicationRequestException(trans('communication::messages.port_type_not_found',[
-                'portType'  =>  $portType
+                'port'  =>  $port
             ]));
         }
-        $this->portType = $portType;
+        $this->port = $port;
     }
 
     /**
@@ -145,8 +145,8 @@ final class CommunicationRequest
     public function toArray(): array
     {
         return [
-            'service_type'  =>  $this->serviceType,
-            'port_type' =>  $this->portType,
+            'service'  =>  $this->service,
+            'port' =>  $this->port,
             'model_type'    =>  $this->modelType,
             'model_id'  =>  $this->modelId,
             'template'  =>  $this->template,
