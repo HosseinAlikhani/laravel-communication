@@ -67,7 +67,7 @@ final class CommunicationRequest
      */
     private function setPortType(int|null $portType)
     {
-        if(! key_exists($portType, Service::PORT_TYPE) )
+        if(! Service::isServicePortValid($this->serviceType, $portType) )
         {
             throw new CommunicationRequestException(trans('communication::messages.port_type_not_found',[
                 'portType'  =>  $portType
