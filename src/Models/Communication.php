@@ -9,4 +9,9 @@ class Communication extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'template_data' =>  'array',
+        'receiver_data' =>  'array',
+    ];
 }
