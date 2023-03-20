@@ -1,6 +1,7 @@
 <?php
 namespace D3cr33\Communication\Requests;
 
+use D3cr33\Communication\Exceptions\CommunicationRequestException;
 use D3cr33\Communication\Services\Service;
 
 final class CommunicationRequest
@@ -18,6 +19,8 @@ final class CommunicationRequest
     /**
      * constructor of communication request
      * @param array $request
+     * @param int $request[service_type]
+     * @param int|null $request[port_type]
      */
     public function __construct(array $request)
     {
@@ -39,7 +42,9 @@ final class CommunicationRequest
     {
         if(! key_exists($serviceType, Service::SERVICE_TYPE) )
         {
-            throw new CommunicationRequest(trans('communication::messages.service_type_not_found'));
+            throw new CommunicationRequestException(trans('communication::messages.service_type_not_found',[
+                'serviceType'  =>  $serviceType
+            ]));
         }
         return $serviceType;
     }
@@ -51,6 +56,6 @@ final class CommunicationRequest
      */
     private function setPortType(int|null $portType): int
     {
-        
+
     }
 }
