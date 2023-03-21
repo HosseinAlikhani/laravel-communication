@@ -1,6 +1,7 @@
 <?php
 namespace D3cr33\Communication\Models;
 
+use D3cr33\Communication\Events\CommunicationAsync;
 use D3cr33\Communication\Requests\CommunicationRequest;
 use D3cr33\Communication\Services\Service;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -68,10 +69,17 @@ class Communication extends Model
      * make communication port
      * @return object
      */
-    public function makePort(): object
+    public function makePort()
     {
         $service = Service::makeService($this->service);
-        return new $service($this);
+        if ( $this->thread == Service::THREAD_ASYNC ) {
+            CommunicationAsync::dispatch($service, $this);
+            return [
+                'status'    =>  200,
+                'message'   =>  trans('communication::messages.message_send_successfully')
+            ];
+        }
+        return (new $service($this))->getResponse()->toArray();
     }
 
     /**
