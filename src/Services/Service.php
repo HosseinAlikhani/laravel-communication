@@ -74,6 +74,15 @@ abstract class Service
     }
 
     /**
+     * get communication response
+     * @return CommunicationResponse
+     */
+    public function getResponse(): CommunicationResponse
+    {
+        return $this->response;
+    }
+
+    /**
      * initialize port service
      * @return void
      */
