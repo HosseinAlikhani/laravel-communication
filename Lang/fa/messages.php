@@ -8,4 +8,6 @@ return [
     'thread_not_found'  =>  'شناسه نحوه پاسخ :thread معتبر نمی باشد.',
     'callback_data_not_found'   =>  'مقدار بازگشتی برای :callback وارد نشده است.',
     'port_not_support'  =>  'متود :port منتخب شده توسط :service پشتیبانی نمیشود.',
+
+    'message_send_successfully' =>  'ارسال با موفقیت انجام شد.',
 ];
