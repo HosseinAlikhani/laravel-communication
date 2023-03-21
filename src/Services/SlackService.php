@@ -26,6 +26,11 @@ class SlackService extends Service
             $this->log();
             throw new Exception($e->getMessage());
         }
+        $this->responseTranslate([
+            'status'    =>  true,
+            'message'   =>  trans('communication::messages.message_send_successfully')
+        ]);
+        return true;
     }
 
     /**
