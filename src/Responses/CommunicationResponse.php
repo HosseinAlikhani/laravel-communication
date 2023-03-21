@@ -27,4 +27,17 @@ final class CommunicationResponse
         $this->statusCode = $statusCode;
         $this->message = $message;
     }
+
+    /**
+     * to array response
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'status'    =>  $this->status,
+            'status_code'   =>  $this->statusCode,
+            'message'   =>  $this->message
+        ];
+    }
 }
