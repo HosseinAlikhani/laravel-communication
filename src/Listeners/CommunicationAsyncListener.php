@@ -1,8 +1,6 @@
 <?php
+namespace D3cr33\Communication\Listeners;
 
-namespace App\Listeners;
-
-use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
