@@ -13,6 +13,9 @@ class CommunicationServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // register event service provider
+        app()->register(CommunicationEventServiceProvider::class);
+
         $this->mergeConfigFrom(__DIR__.'/../Config/communication.php', 'communication');
     }
 
