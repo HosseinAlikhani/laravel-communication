@@ -12,11 +12,20 @@ class SlackService extends Service
 
     protected function send()
     {
-        Http::withHeaders([
-            'Content-Type' => 'application/json',
-        ])->post($this->config->HOOK_URL,[
-            'text' => $this->communication->template
-        ]);
+        try{
+            Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->post($this->config->HOOK_URL,[
+                'text' => $this->communication->message->message
+            ]);
+        }catch(Exception $e){
+            $this->responseTranslate([
+                'status'    =>  false,
+                'message'   =>  $e->getMessage()
+            ]);
+            $this->log();
+            throw new Exception($e->getMessage());
+        }
     }
 
     /**
@@ -27,9 +36,9 @@ class SlackService extends Service
     protected function responseTranslate(array $response)
     {
         $this->setResponse([
-            'status'    =>  $response['IsSuccessful'],
-            'statusCode' => $response['IsSuccessful'] ? 200 : 500,
-            'message'   =>  $response['Message']
+            'status'    =>  $response['status'],
+            'statusCode' => $response['status'] ? 200 : 500,
+            'message'   =>  $response['message']
         ]);
     }
 }
