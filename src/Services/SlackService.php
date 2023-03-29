@@ -28,7 +28,7 @@ class SlackService extends Service
         }
         $this->responseTranslate([
             'status'    =>  true,
-            'message'   =>  trans('communication::messages.message_send_successfully')
+            'message'   =>  trans('communication::messages.response_success')
         ]);
         return true;
     }
