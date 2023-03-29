@@ -121,6 +121,18 @@ abstract class Service
     }
 
     /**
+     * communication delivered
+     * @return bool
+     */
+    public function communicationDelivered(): bool
+    {
+        $this->communication->update([
+            'delivery_at'   =>  now()
+        ]);
+        return true;
+    }
+
+    /**
      * make service from service
      * @param int $service
      * @return string
