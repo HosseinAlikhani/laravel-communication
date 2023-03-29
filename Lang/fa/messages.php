@@ -9,5 +9,6 @@ return [
     'callback_data_not_found'   =>  'مقدار بازگشتی برای :callback وارد نشده است.',
     'port_not_support'  =>  'متود :port منتخب شده توسط :service پشتیبانی نمیشود.',
 
-    'message_send_successfully' =>  'ارسال با موفقیت انجام شد.',
+    'response_success' =>  'ارسال با موفقیت انجام شد.',
+    'response_failed'   =>  'خطایی رخ داده,دوباره امتحان کنید.'
 ];
