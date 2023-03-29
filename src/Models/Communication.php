@@ -76,7 +76,7 @@ class Communication extends Model
             CommunicationAsync::dispatch($service, $this);
             return [
                 'status'    =>  200,
-                'message'   =>  trans('communication::messages.message_send_successfully')
+                'message'   =>  trans('communication::messages.request_submited')
             ];
         }
         return (new $service($this))->getResponse()->toArray();
