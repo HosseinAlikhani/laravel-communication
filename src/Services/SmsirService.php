@@ -35,14 +35,39 @@ class SmsirService extends Service
         }
 
         $this->token = $response->json('TokenKey');
-        throw new Exception($this->token);
-        return $this->token;
         return true;
+    }
+
+    /**
+     * verification code
+     */
+    protected function verification()
+    {
+        if(! $this->generateToken() ){
+            return false;
+        }
+
+        $receiverData = $this->communication->receiver_data;
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'text/plain',
+            'X-API-KEY' => $this->token
+        ])->post('https://api.sms.ir/v1/send/verify', [
+            'parameters'  =>  [
+                [
+                    "name"  =>  "verificationCode",
+                    "value" =>  $receiverData['verification_code']
+                ]
+            ],
+            'templateId'    =>  (int) $this->communication->template_id,
+            'mobile'  =>  $receiverData['mobile']
+        ]);
+
+        dd( 'response', $response->json() );
     }
 
     protected function send()
     {
-        return $this->generateToken();
         if(! $this->generateToken() ){
             return false;
         }
