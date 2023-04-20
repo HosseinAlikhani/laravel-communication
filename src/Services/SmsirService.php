@@ -39,6 +39,11 @@ class SmsirService extends Service
                 return false;
             }
         }catch(Exception $e){
+            $this->responseTranslate([
+                'IsSuccessful'    =>  false,
+                'Message'   =>  $e
+            ]);
+            $this->log();
             return false;
         }
     }
@@ -57,7 +62,7 @@ class SmsirService extends Service
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'text/plain',
-                'x-sms-ir-secure-tokens' => $this->token
+                'x-sms-ir-secure-token' => $this->token
             ])->post('https://RestfulSms.com/api/UltraFastSend', [
                 'ParameterArray'  =>  [
                     [
@@ -82,6 +87,7 @@ class SmsirService extends Service
                 'IsSuccessful'    =>  false,
                 'Message'   =>  $e
             ]);
+            $this->log();
             return $this->response->toArray();
         }
     }
