@@ -79,8 +79,8 @@ class SmsirService extends Service
             return $this->response->toArray();
         }catch(Exception $e){
             $this->responseTranslate([
-                'status'    =>  false,
-                'message'   =>  'ssss'
+                'IsSuccessful'    =>  false,
+                'Message'   =>  $e
             ]);
             return $this->response->toArray();
         }
@@ -92,19 +92,32 @@ class SmsirService extends Service
             return false;
         }
 
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'text/plain',
-            'X-API-KEY' => $this->token
-        ])->post('https://api.sms.ir/v1/send/likeToLike', [
-            'messageTexts'  =>  [
-                'its test',
-            ],
-            'mobiles'   =>  [
-                '09361374744'
-            ]
-        ]);
+        try{
+            $receiverData = $this->communication->receiver_data;
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'text/plain',
+                'x-sms-ir-secure-token' => $this->token
+            ])->post('https://RestfulSms.com/api/MessageSend', [
+                'Messages'  =>  [$this->communication->template],
+                'MobileNumbers'   =>  [$receiverData['mobile']],
+                'LineNumber'    =>  $this->config->LINE_NUMBER
+            ]);
+            $this->responseTranslate($response->json());
 
+            if( $this->response->isSuccessful() ){
+                $this->communicationDelivered();
+            }else{
+                $this->log();
+            }
+            return $this->response->toArray();
+        }catch(Exception $e){
+            $this->responseTranslate([
+                'IsSuccessful'    =>  false,
+                'Message'   =>  $e
+            ]);
+            return $this->response->toArray();
+        }
     }
 
     /**
