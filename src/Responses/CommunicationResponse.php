@@ -29,6 +29,15 @@ final class CommunicationResponse
     }
 
     /**
+     * check is response is success or failed
+     * @return bool
+     */
+    public function isSuccessful(): bool
+    {
+        return $this->status ? true : false;
+    }
+
+    /**
      * to array response
      * @return array
      */
