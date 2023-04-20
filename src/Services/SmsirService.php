@@ -20,22 +20,27 @@ class SmsirService extends Service
 
     private function generateToken()
     {
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept'    =>  'text/plain'
-        ])->post('https://RestfulSms.com/api/Token',[
-            'UserApiKey'    =>  $this->config->USER_API_KEY,
-            'SecretKey' =>  $this->config->SECRET_KEY
-        ]);
+        try{
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept'    =>  'text/plain'
+            ])->post('https://RestfulSms.com/api/Token',[
+                'UserApiKey'    =>  $this->config->USER_API_KEY,
+                'SecretKey' =>  $this->config->SECRET_KEY
+            ]);
 
-        if(! $response->json('IsSuccessful') ){
             $this->responseTranslate($response->json());
-            $this->log();
+
+            if( $this->response->isSuccessful() ){
+                $this->token = $response->json('TokenKey');
+                return true;
+            }else{
+                $this->log();
+                return false;
+            }
+        }catch(Exception $e){
             return false;
         }
-
-        $this->token = $response->json('TokenKey');
-        return true;
     }
 
     /**
