@@ -56,7 +56,7 @@ class SmsirService extends Service
             'parameters'  =>  [
                 [
                     "name"  =>  "verificationCode",
-                    "value" =>  $receiverData['verification_code']
+                    "value" =>  (string) $receiverData['verification_code']
                 ]
             ],
             'templateId'    =>  (int) $this->communication->template_id,
