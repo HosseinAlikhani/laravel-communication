@@ -48,22 +48,37 @@ class SmsirService extends Service
         }
 
         $receiverData = $this->communication->receiver_data;
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'Accept' => 'text/plain',
-            'X-API-KEY' => $this->token
-        ])->post('https://api.sms.ir/v1/send/verify', [
-            'parameters'  =>  [
-                [
-                    "name"  =>  "verificationCode",
-                    "value" =>  (string) $receiverData['verification_code']
-                ]
-            ],
-            'templateId'    =>  (int) $this->communication->template_id,
-            'mobile'  =>  $receiverData['mobile']
-        ]);
+        try{
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'text/plain',
+                'x-sms-ir-secure-tokens' => $this->token
+            ])->post('https://RestfulSms.com/api/UltraFastSend', [
+                'ParameterArray'  =>  [
+                    [
+                        "Parameter"  =>  "verificationCode",
+                        "ParameterValue" =>  (string) $receiverData['verification_code']
+                    ]
+                ],
+                'TemplateId'    =>  (int) $this->communication->template_id,
+                'mobile'  =>  $receiverData['mobile']
+            ]);
 
-        dd( 'response', $response->json() );
+            $this->responseTranslate($response->json());
+
+            if( $this->response->isSuccessful() ){
+                $this->communicationDelivered();
+            }else{
+                $this->log();
+            }
+            return $this->response->toArray();
+        }catch(Exception $e){
+            $this->responseTranslate([
+                'status'    =>  false,
+                'message'   =>  'ssss'
+            ]);
+            return $this->response->toArray();
+        }
     }
 
     protected function send()
