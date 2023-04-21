@@ -35,7 +35,7 @@ class SmsirService extends Service
                 $this->token = $response->json('TokenKey');
                 return true;
             }else{
-                $this->log();
+                // $this->log();
                 throw new Exception($this->response->message);
             }
         }catch(Exception $e){
@@ -79,7 +79,7 @@ class SmsirService extends Service
             if( $this->response->isSuccessful() ){
                 $this->communicationDelivered();
             }else{
-                $this->log();
+                // $this->log();
                 throw new Exception($this->response->message);
             }
             return $this->response->toArray();
@@ -116,7 +116,7 @@ class SmsirService extends Service
             if( $this->response->isSuccessful() ){
                 $this->communicationDelivered();
             }else{
-                $this->log();
+                // $this->log();
                 throw new Exception($this->response->message);
             }
             return $this->response->toArray();
