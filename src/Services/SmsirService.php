@@ -36,7 +36,7 @@ class SmsirService extends Service
                 return true;
             }else{
                 $this->log();
-                return false;
+                throw new Exception($this->response->message);
             }
         }catch(Exception $e){
             $this->responseTranslate([
@@ -44,7 +44,7 @@ class SmsirService extends Service
                 'Message'   =>  $e
             ]);
             $this->log();
-            return false;
+            throw new Exception($e);
         }
     }
 
@@ -80,6 +80,7 @@ class SmsirService extends Service
                 $this->communicationDelivered();
             }else{
                 $this->log();
+                throw new Exception($this->response->message);
             }
             return $this->response->toArray();
         }catch(Exception $e){
@@ -88,7 +89,8 @@ class SmsirService extends Service
                 'Message'   =>  $e
             ]);
             $this->log();
-            return $this->response->toArray();
+            throw new Exception($e);
+            // return $this->response->toArray();
         }
     }
 
@@ -115,6 +117,7 @@ class SmsirService extends Service
                 $this->communicationDelivered();
             }else{
                 $this->log();
+                throw new Exception($this->response->message);
             }
             return $this->response->toArray();
         }catch(Exception $e){
@@ -122,7 +125,8 @@ class SmsirService extends Service
                 'IsSuccessful'    =>  false,
                 'Message'   =>  $e
             ]);
-            return $this->response->toArray();
+            throw new Exception($e);
+            // return $this->response->toArray();
         }
     }
 
