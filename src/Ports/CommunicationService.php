@@ -17,7 +17,7 @@ final class CommunicationService
      * @param string $$communicationData[template_id]
      * @param string $$communicationData[template_data]
      * @param string $$communicationData[receiver_data]
-     * @param string $$communicationData[end_at]
+     * @param string $$communicationData[send_at]
      * @param string $$communicationData[thread]
      * @param string $$communicationData[callback]
      * @param string $$communicationData[callback_data]
