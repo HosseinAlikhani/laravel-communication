@@ -77,3 +77,26 @@ callback_data
 Type: ARRAY
 Description: data that used in a callback
 ```
+
+## How add new service
+
+1) First in D3cr33\Communication\Services class add your service name with specific id in SERVICE_TYPE property like
+```
+public const SERVICE_TYPE = [
+    1   =>  'smsir',
+    2   =>  'slack',
+    3   =>  'googleCloud'
+];
+```
+if use multi-words in use CamelCase like
+```
+- googleCloud
+- slackHook
+```
+
+2. Create your class in Services/ directory and extends from D3cr33\Communication\Services like
+```
+class SlackService exnteds Service {
+
+}
+```
