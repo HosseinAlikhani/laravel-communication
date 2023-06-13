@@ -86,4 +86,13 @@ final class CommunicationFaker
     {
         return fake()->sentence(4);
     }
+
+    /**
+     * generate fake callback data
+     * @return array
+     */
+    public function callbackData(): array
+    {
+        return fake()->words();
+    }
 }
