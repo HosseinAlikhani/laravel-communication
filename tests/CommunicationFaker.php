@@ -50,4 +50,13 @@ final class CommunicationFaker
     {
         return fake()->randomNumber();
     }
+
+    /**
+     * generate fake template data
+     * @return array
+     */
+    public function templateData(): array
+    {
+        return fake()->words();
+    }
 }
