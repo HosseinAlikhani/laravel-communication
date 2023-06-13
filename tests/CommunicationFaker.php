@@ -41,4 +41,13 @@ final class CommunicationFaker
     {
         return fake()->word();
     }
+
+    /**
+     * generate fake template id
+     * @return int
+     */
+    public function templateId(): int
+    {
+        return fake()->randomNumber();
+    }
 }
