@@ -14,4 +14,13 @@ final class CommunicationFaker
         $service = Service::SERVICE_TYPE;
         return $service[mt_rand(1, count($service))];
     }
+
+    /**
+     * generate fake model type
+     * @return string
+     */
+    public function modelType(): string
+    {
+        return fake()->word();
+    }
 }
