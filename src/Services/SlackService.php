@@ -1,6 +1,7 @@
 <?php
 namespace D3cr33\Communication\Services;
 
+use D3cr33\Communication\HttpClient\HttpService;
 use Exception;
 use Illuminate\Support\Facades\Http;
 
@@ -13,11 +14,13 @@ class SlackService extends Service
     protected function send()
     {
         try{
-            Http::withHeaders([
-                'Content-Type' => 'application/json',
-            ])->post($this->config->HOOK_URL,[
-                'text' => $this->communication->message->message
-            ]);
+            (new HttpService)
+                ->withHeaders([
+                    'Content-Type' => 'application/json',
+                ])
+                ->post($this->config->HOOK_URL, [
+                    'text' => $this->communication->message->message
+                ]);
         }catch(Exception $e){
             $this->responseTranslate([
                 'status'    =>  false,
