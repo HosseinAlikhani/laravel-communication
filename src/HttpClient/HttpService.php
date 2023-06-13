@@ -39,4 +39,15 @@ final class HttpService
     {
         return $this->http->post($url, $data);
     }
+
+    /**
+     * get http client
+     * @param string $url
+     * @param string|null $query
+     * @return Response
+     */
+    public function get(string $url, string|null $query): Response
+    {
+        return $this->http->get($url, $query);
+    }
 }
