@@ -17,4 +17,15 @@ final class HttpService
     {
         $this->http = new Http();   
     }
+
+    /**
+     * post http client
+     * @param string $url
+     * @param array $data
+     * @return Response
+     */
+    public function post(string $url, array $data): Response
+    {
+        return $this->http->post($url, $data);
+    }
 }
