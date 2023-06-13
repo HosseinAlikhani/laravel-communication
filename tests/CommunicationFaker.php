@@ -68,4 +68,13 @@ final class CommunicationFaker
     {
         return fake()->words();
     }
+
+    /**
+     * generate fake send at
+     * @return string
+     */
+    public function sendAt(): string
+    {
+        return fake()->dateTime();
+    }
 }
