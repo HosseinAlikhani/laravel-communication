@@ -77,4 +77,13 @@ final class CommunicationFaker
     {
         return fake()->date();
     }
+
+    /**
+     * generate fake callback
+     * @return string
+     */
+    public function callback(): string
+    {
+        return fake()->sentence(4);
+    }
 }
