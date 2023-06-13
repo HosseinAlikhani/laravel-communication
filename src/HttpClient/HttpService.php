@@ -19,6 +19,17 @@ final class HttpService
     }
 
     /**
+     * set header to http client
+     * @param array $headers
+     * @return self
+     */
+    public function withHeaders(array $headers): self
+    {
+        $this->http->withHeaders($headers);
+        return $this;
+    }
+
+    /**
      * post http client
      * @param string $url
      * @param array $data
