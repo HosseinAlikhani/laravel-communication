@@ -79,6 +79,16 @@ final class CommunicationFaker
     }
 
     /**
+     * generate fake thread
+     * @return int
+     */
+    public function thread(): int
+    {
+        $thread = Service::THREAD;
+        return array_keys($thread)[mt_rand(1, count($thread))];
+    }
+
+    /**
      * generate fake callback
      * @return string
      */
