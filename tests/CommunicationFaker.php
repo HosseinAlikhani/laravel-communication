@@ -59,4 +59,13 @@ final class CommunicationFaker
     {
         return fake()->words();
     }
+
+    /**
+     * generate fake receiver data
+     * @return array
+     */
+    public function receiverData(): array
+    {
+        return fake()->words();
+    }
 }
