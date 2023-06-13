@@ -32,4 +32,13 @@ final class CommunicationFaker
     {
         return fake()->randomNumber();
     }
+
+    /**
+     * generate fake template
+     * @return string
+     */
+    public function template(): string
+    {
+        return fake()->word();
+    }
 }
