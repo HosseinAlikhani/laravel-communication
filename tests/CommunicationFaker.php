@@ -75,6 +75,6 @@ final class CommunicationFaker
      */
     public function sendAt(): string
     {
-        return fake()->dateTime();
+        return fake()->date();
     }
 }
