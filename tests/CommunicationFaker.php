@@ -23,4 +23,13 @@ final class CommunicationFaker
     {
         return fake()->word();
     }
+
+    /**
+     * generate fake model id
+     * @return int
+     */
+    public function modelId(): int
+    {
+        return fake()->randomNumber();
+    }
 }
