@@ -85,7 +85,7 @@ final class CommunicationFaker
     public function thread(): int
     {
         $thread = Service::THREAD;
-        return array_keys($thread)[mt_rand(1, count($thread))];
+        return array_keys($thread)[mt_rand(0, 1)];
     }
 
     /**
