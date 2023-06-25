@@ -1,5 +1,6 @@
 <?php
 
+use D3cr33\Communication\Services\Service;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->timestamp('send_at')->nullable();
             $table->timestamp('delivery_at')->nullable();
             $table->integer('try')->default(0);
-            $table->enum('thread', ['sync', 'async']);
+            $table->enum('thread', [Service::THREAD_SYNC, Service::THREAD_ASYNC]);
             $table->timestamps();
         });
     }
