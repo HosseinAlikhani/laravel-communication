@@ -15,7 +15,7 @@ class TestCase extends OrchestraTestCase
     {
         parent::setUp();
         $this->faker = app(CommunicationFaker::class);
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
+        $this->artisan('migrate', ['--database' => 'sqlite'])->run();
     }
 
     protected function getEnvironmentSetUp($app)
