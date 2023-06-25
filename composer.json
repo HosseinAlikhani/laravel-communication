@@ -19,6 +19,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.7",
         "illuminate/auth": "^10.0",
         "illuminate/container": "^10.0",
         "illuminate/contracts": "^10.0",
