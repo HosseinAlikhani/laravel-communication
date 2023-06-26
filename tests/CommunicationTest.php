@@ -1,6 +1,9 @@
 <?php
 namespace D3cr33\Communication\Test;
 
+use D3cr33\Communication\Ports\CommunicationService;
+use Illuminate\Support\Facades\Http;
+
 class CommunicationTest extends TestCase
 {
     public function test_communicaton_execute_method_success()
@@ -19,5 +22,15 @@ class CommunicationTest extends TestCase
             'callback'  =>  $this->faker->callback(),
             'callback_data' =>  $this->faker->callbackData()
         ];
+
+        Http::fake([
+            '*'    =>  Http::response([
+                'status'    =>  true,
+                'message'   =>  'mock response'
+            ], 422)
+        ]);
+
+        $result = (new CommunicationService)->execute($data);
+        $this->assertEquals(true, $result['status']);
     }
 }
