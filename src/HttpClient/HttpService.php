@@ -2,20 +2,21 @@
 
 namespace D3cr33\Communication\HttpClient;
 
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
-final class HttpService
+class HttpService
 {
     /**
      * store http client
-     * @var Http
+     * @var PendingRequest
      */
-    private Http $http;
+    private PendingRequest|null $http;
 
     public function __construct()
     {
-        $this->http = new Http();   
+        $this->http = null;
     }
 
     /**
@@ -25,7 +26,7 @@ final class HttpService
      */
     public function withHeaders(array $headers): self
     {
-        $this->http->withHeaders($headers);
+        $this->http = Http::withHeaders($headers);
         return $this;
     }
 
