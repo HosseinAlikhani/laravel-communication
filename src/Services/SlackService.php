@@ -13,8 +13,9 @@ class SlackService extends Service
 
     protected function send()
     {
+        $httpService = app(HttpService::class);
         try{
-            (new HttpService)
+            $httpService
                 ->withHeaders([
                     'Content-Type' => 'application/json',
                 ])
