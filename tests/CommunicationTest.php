@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 class CommunicationTest extends TestCase
 {
-    public function test_communicaton_execute_method_success()
+    public function test_communicaton_execute_method_for_slack_success()
     {
         $data = [
             'service'   =>  2,
@@ -32,5 +32,6 @@ class CommunicationTest extends TestCase
 
         $result = (new CommunicationService)->execute($data);
         $this->assertEquals(true, $result['status']);
+        $this->assertEquals(trans('communication::messages.response_success'), $result['message']);
     }
 }
