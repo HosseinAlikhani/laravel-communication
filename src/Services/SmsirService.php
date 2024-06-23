@@ -81,8 +81,8 @@ class SmsirService extends Service
             return $this->response->toArray();
         }catch(Exception $e){
             $this->responseTranslate([
-                'IsSuccessful'    =>  false,
-                'Message'   =>  $e
+                'success'    =>  false,
+                'message'   =>  $e
             ]);
             $this->log();
             throw new Exception($e);
@@ -114,8 +114,8 @@ class SmsirService extends Service
             return $this->response->toArray();
         }catch(Exception $e){
             $this->responseTranslate([
-                'IsSuccessful'    =>  false,
-                'Message'   =>  $e
+                'success'    =>  false,
+                'message'   =>  $e
             ]);
             throw new Exception($e);
             // return $this->response->toArray();
