@@ -98,10 +98,10 @@ class SmsirService extends Service
                 'Content-Type' => 'application/json',
                 'Accept' => 'text/plain',
                 'X-API-KEY' => $this->config->API_KEY
-            ])->post('https://RestfulSms.com/api/MessageSend', [
-                'Messages'  =>  [$this->communication->template],
-                'MobileNumbers'   =>  [$receiverData['mobile']],
-                'LineNumber'    =>  $this->config->LINE_NUMBER
+            ])->post('https://api.sms.ir/v1/send/likeToLike', [
+                'MessageText'  =>  [$this->communication->template],
+                'Mobiles'   =>  [$receiverData['mobile']],
+                'lineNumber'    =>  $this->config->LINE_NUMBER
             ]);
             $this->responseTranslate($response->json());
 
