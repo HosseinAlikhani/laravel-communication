@@ -59,14 +59,14 @@ class SmsirService extends Service
                 'Content-Type' => 'application/json',
                 'Accept' => 'text/plain',
                 'X-API-KEY' => $this->config->API_KEY
-            ])->post('https://RestfulSms.com/api/UltraFastSend', [
-                'ParameterArray'  =>  [
+            ])->post('https://api.sms.ir/v1/send/verify', [
+                'parameters'  =>  [
                     [
-                        "Parameter"  =>  "verificationCode",
-                        "ParameterValue" =>  (string) $receiverData['verification_code']
+                        "name"  =>  "verificationCode",
+                        "value" =>  (string) $receiverData['verification_code']
                     ]
                 ],
-                'TemplateId'    =>  (int) $this->communication->template_id,
+                'templateId'    =>  (int) $this->communication->template_id,
                 'mobile'  =>  $receiverData['mobile']
             ]);
 
