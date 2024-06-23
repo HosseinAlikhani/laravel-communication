@@ -53,16 +53,12 @@ class SmsirService extends Service
      */
     protected function verification()
     {
-        if(! $this->generateToken() ){
-            return false;
-        }
-
         $receiverData = $this->communication->receiver_data;
         try{
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'text/plain',
-                'x-sms-ir-secure-token' => $this->token
+                'X-API-KEY' => $this->config->API_KEY
             ])->post('https://RestfulSms.com/api/UltraFastSend', [
                 'ParameterArray'  =>  [
                     [
@@ -96,16 +92,12 @@ class SmsirService extends Service
 
     protected function send()
     {
-        if(! $this->generateToken() ){
-            return false;
-        }
-
         try{
             $receiverData = $this->communication->receiver_data;
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'text/plain',
-                'x-sms-ir-secure-token' => $this->token
+                'X-API-KEY' => $this->config->API_KEY
             ])->post('https://RestfulSms.com/api/MessageSend', [
                 'Messages'  =>  [$this->communication->template],
                 'MobileNumbers'   =>  [$receiverData['mobile']],
