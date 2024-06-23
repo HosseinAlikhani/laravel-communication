@@ -130,9 +130,9 @@ class SmsirService extends Service
     protected function responseTranslate(array $response)
     {
         $this->setResponse([
-            'status'    =>  $response['IsSuccessful'],
-            'statusCode' => $response['IsSuccessful'] ? 200 : 500,
-            'message'   =>  $response['Message']
+            'status'    =>  $response['success'],
+            'statusCode' => $response['success'] && $response['success'] == 1 ? 200 : 500,
+            'message'   =>  $response['message']
         ]);
     }
 }
