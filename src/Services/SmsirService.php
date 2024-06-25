@@ -117,6 +117,7 @@ class SmsirService extends Service
                 'success'    =>  false,
                 'message'   =>  $e
             ]);
+            $this->log();
             throw new Exception($e);
             // return $this->response->toArray();
         }
