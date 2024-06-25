@@ -99,7 +99,7 @@ class SmsirService extends Service
                 'Accept' => 'text/plain',
                 'X-API-KEY' => $this->config->API_KEY
             ])->post('https://api.sms.ir/v1/send/likeToLike', [
-                'MessageText'  =>  [$this->communication->template],
+                'MessageTexts'  =>  [$this->communication->template],
                 'Mobiles'   =>  [$receiverData['mobile']],
                 'lineNumber'    =>  $this->config->LINE_NUMBER
             ]);
