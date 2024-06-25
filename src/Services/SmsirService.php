@@ -62,7 +62,7 @@ class SmsirService extends Service
             ])->post('https://api.sms.ir/v1/send/verify', [
                 'parameters'  =>  [
                     [
-                        "name"  =>  "CODE",
+                        "name"  =>  "VERIFICATIONCODE",
                         "value" =>  (string) $receiverData['verification_code']
                     ]
                 ],
