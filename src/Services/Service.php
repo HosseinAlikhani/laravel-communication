@@ -129,7 +129,19 @@ abstract class Service
         $this->communication->update([
             'delivery_at'   =>  now()
         ]);
+        $this->communicationCallback();
         return true;
+    }
+
+
+    public function communicationCallback(): bool
+    {
+        $callback = $this->communication->callback;
+        if ($callback) {
+            $callback->callback::dispatch($callback->callback_data);
+            return true;
+        }
+        return false;
     }
 
     /**
