@@ -74,8 +74,12 @@ class SmsirService extends Service
 
             if( $this->response->isSuccessful() ){
                 $this->communicationDelivered();
-            }else{
-                // $this->log();
+            }else {
+                $this->log();
+                $this->responseTranslate([
+                    'success'    =>  false,
+                    'message'   =>  $this->response->message
+                ]);
                 throw new Exception($this->response->message);
             }
             return $this->response->toArray();
@@ -108,7 +112,11 @@ class SmsirService extends Service
             if( $this->response->isSuccessful() ){
                 $this->communicationDelivered();
             }else{
-                // $this->log();
+                $this->log();
+                $this->responseTranslate([
+                    'success'    =>  false,
+                    'message'   =>  $this->response->message
+                ]);
                 throw new Exception($this->response->message);
             }
             return $this->response->toArray();
